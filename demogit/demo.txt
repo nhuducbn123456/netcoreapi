@@ -1,2 +1,2 @@
-nội dung đầu tiên
-nội dung thứ 2
+văn bản 1
+văn bản 2
