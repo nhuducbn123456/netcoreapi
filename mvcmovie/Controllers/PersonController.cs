@@ -2,19 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using mvcmovie.Data;
 using mvcmovie.Models;
+using mvcmovie.Models.Process;
+using OfficeOpenXml;
 namespace mvcmovie.Controllers
 {
     public class PersonController : Controller
     {
         private  readonly ApplicationDbContext _context;
+        private ExcelProcess _excelProcess = new ExcelProcess();          
         public PersonController(ApplicationDbContext context)
         {
             _context = context;
         }
-        private bool PersonExists(string id)
-        {
-            return (_context.Person?.Any(e => e.PersonId ==id)).GetValueOrDefault();
-        }
+        
         
         public async Task<IActionResult> Index()
         {
@@ -67,6 +67,10 @@ namespace mvcmovie.Controllers
             }
             return View(person);
         }
+        private bool PersonExists(string id)
+    {
+        return _context.Person.Any(p => p.PersonId == id);
+    }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id ,Person person)
@@ -125,5 +129,54 @@ namespace mvcmovie.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction (nameof(Index));
         }
-    }   
+        public async Task<IActionResult> Upload()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upload(IFormFile file)
+        {
+           if(file==null){
+            return BadRequest("Full null");
+           }
+           string fileExtension =Path.GetExtension(file.FileName);
+           if(fileExtension.ToLower()!=".xlsx"&& fileExtension.ToLower()!=".xls"){
+             return BadRequest("Full null");
+           }
+           var fileName = file.FileName;
+           var filePath = Path.Combine(Directory.GetCurrentDirectory()+"/Uploads/Excels",fileName);
+           var fileLocation = new FileInfo(filePath).ToString();
+           using(var stream = new FileStream(filePath,FileMode.Create)){
+            var dt =_excelProcess.ExcelToDataTable(fileLocation);
+            // var ps = new Person();
+            // for(int i=0;i<dt.Rows.Count;i++){
+            //     ps.PersonId=dt.Rows[i][0].ToString();
+            //     ps.FullName=dt.Rows[i][1].ToString();
+            //     ps.Address=dt.Rows[i][2].ToString();
+            //     _context.Person.Add(ps);
+            // }
+            // await _context.SaveChangesAsync();
+            // return RedirectToAction(nameof(Index));
+            var countDt = dt.Rows.Count;
+            ViewBag.tt = countDt;
+           }
+           return View();
+        }
+        public IActionResult Download()
+        {
+            var fileName = "YourFileName" + ".xlsx";
+            using(ExcelPackage excelPackage = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet 1");
+                worksheet.Cells["A1"].Value = "PersonId";
+                worksheet.Cells["B1"].Value = "FullName";
+                worksheet.Cells["C1"].Value = "Address";
+                var personList = _context.Person.ToList();
+                worksheet.Cells["A2"].LoadFromCollection(personList);
+                var stream = new MemoryStream(excelPackage.GetAsByteArray());
+                return File(stream,"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
+            }
+    }
+}
 }
