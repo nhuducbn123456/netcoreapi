@@ -1,0 +1,5 @@
+C:\net_core_api\newapp\obj\Debug\net8.0\newapp.GeneratedMSBuildEditorConfig.editorconfig
+C:\net_core_api\newapp\obj\Debug\net8.0\newapp.AssemblyInfoInputs.cache
+C:\net_core_api\newapp\obj\Debug\net8.0\newapp.AssemblyInfo.cs
+C:\net_core_api\newapp\obj\Debug\net8.0\newapp.csproj.CoreCompileInputs.cache
+C:\net_core_api\newapp\obj\Debug\net8.0\newapp.sourcelink.json

@@ -12,3 +12,4 @@ C:\net_core_api\newapp\obj\Debug\net7.0\refint\newapp.dll
 C:\net_core_api\newapp\obj\Debug\net7.0\newapp.pdb
 C:\net_core_api\newapp\obj\Debug\net7.0\newapp.genruntimeconfig.cache
 C:\net_core_api\newapp\obj\Debug\net7.0\ref\newapp.dll
+C:\net_core_api\newapp\obj\Debug\net7.0\newapp.sourcelink.json

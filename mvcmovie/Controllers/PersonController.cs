@@ -148,20 +148,25 @@ namespace mvcmovie.Controllers
            var filePath = Path.Combine(Directory.GetCurrentDirectory()+"/Uploads/Excels",fileName);
            var fileLocation = new FileInfo(filePath).ToString();
            using(var stream = new FileStream(filePath,FileMode.Create)){
+            await file.CopyToAsync(stream);
             var dt =_excelProcess.ExcelToDataTable(fileLocation);
-            // var ps = new Person();
-            // for(int i=0;i<dt.Rows.Count;i++){
-            //     ps.PersonId=dt.Rows[i][0].ToString();
-            //     ps.FullName=dt.Rows[i][1].ToString();
-            //     ps.Address=dt.Rows[i][2].ToString();
-            //     _context.Person.Add(ps);
-            // }
-            // await _context.SaveChangesAsync();
-            // return RedirectToAction(nameof(Index));
-            var countDt = dt.Rows.Count;
-            ViewBag.tt = countDt;
+            for(int i=0;i<dt.Rows.Count;i++){
+                  var ps = new Person();
+                ps.PersonId=dt.Rows[i][0].ToString();
+                ps.FullName=dt.Rows[i][1].ToString();
+                ps.Address=dt.Rows[i][2].ToString();
+                _context.Person.Add(ps);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
            }
            return View();
+        }
+        public async Task<IActionResult> DeleteAll(){
+            var PersonList = _context.Person.ToList();  
+            _context.Person.RemoveRange(PersonList);
+            await _context.SaveChangesAsync();  
+             return RedirectToAction(nameof(Index));
         }
         public IActionResult Download()
         {
