@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\NND_BT2324.props" />
+</Project>
