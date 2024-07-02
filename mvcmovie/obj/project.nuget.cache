@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YVo5bGUhKUSQ3zhTcM/G4syPg0qm2uG/IBZ0Xs2qwa7/WIIocYTJjMRovND8n9CI5ad1dPLlU9sJ+eu6YFLhAA==",
+  "dgSpecHash": "Hwwzukm0vGn0nbXruleOrYoTvKBH+TY7aannxYzcY6Pog62MOyY0AIcAQ3R2RMXOIv6YlK7ZajaKJKyABw/06w==",
   "success": true,
   "projectFilePath": "C:\\net_core_api\\mvcmovie\\mvcmovie.csproj",
   "expectedPackageFiles": [
@@ -180,7 +180,9 @@
     "C:\\Users\\nhudu\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\nhudu\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\nhudu\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\nhudu\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512"
+    "C:\\Users\\nhudu\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\nhudu\\.nuget\\packages\\x.pagedlist\\9.1.2\\x.pagedlist.9.1.2.nupkg.sha512",
+    "C:\\Users\\nhudu\\.nuget\\packages\\x.pagedlist.mvc.core\\9.1.2\\x.pagedlist.mvc.core.9.1.2.nupkg.sha512"
   ],
   "logs": []
 }
